@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{% endblock  %}
+
+{% block content %}
+<div>
+    <h1>Home page</h1>
+    {% for m in mans %}
+    <form action="" method="post">
+        <div class="card bg-light shadow p-5 ">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Picture</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{m.name}}</td>
+                    <td>{{m.address}}</td>
+                    <td>
+                        {% if m.profile_pic %}
+                          <a href="{{m.profile_pic.url}}" target="_blank">
+                            <img src="{{m.profile_pic.url}}" style="height:50px; width:50px">
+                          </a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        
+                        <a href="{% url "edit" m.id %}" class='btn btn-warning btn-sm'>edit</a>
+                        <a href="/delete/{{m.id}}" class='btn btn-danger'>delete</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </form>
+</div>
+{% endfor %}
+{% endblock  %}
+
